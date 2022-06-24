@@ -15,6 +15,7 @@ pipeline {
 				sh """
 				echo "Build stage"
 				docker build -t $image_name .
+		   		"""
 			}
 		}
 		stage('Deploy') {
