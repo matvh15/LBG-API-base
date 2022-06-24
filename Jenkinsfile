@@ -32,7 +32,7 @@ pipeline {
 		stage('Deploy') {
 			steps {
 				sh "echo Deploy stage"
-				docker run -d  --name ${APP_NAME} ${APP_NAME}	
+				sh "docker run -d --name ${APP_NAME} ${DOCKERHUB_CREDS_USR}/${APP_NAME}:${TAG}"
 			}
 		}
 	}
