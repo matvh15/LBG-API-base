@@ -1,7 +1,8 @@
 pipeline {
 	agent any
 	environment {
-		image_name="matvh15/lbg-api-app:latest"
+		APP_NAME="lbg-api-app"
+		TAG="latest"
 		DOCKERHUB_USERNAME=credentials("DOCKERHUB_CREDS_USR")
 		DOCKERHUN_PASSWORD=credentials("DOCKERHUB_CREDS_PSW")
 	}
@@ -16,16 +17,16 @@ pipeline {
 			steps {
 				sh """
 				echo "Build stage"
-				docker build -t $image_name .
+				docker build -t ${APP_NAME}:${TAG} .
 		   		"""
 			}
 		}
 		stage('Push') {
 			steps {
-				sh "docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD"
+				sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
 				sh """
 				echo "Push image to registry: "
-				docker push $image_name
+				docker push ${APP_NAME}:${TAG}
 				"""
 			}	
 		}
