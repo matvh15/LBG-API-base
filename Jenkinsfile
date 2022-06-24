@@ -1,6 +1,11 @@
 pipeline {
 	agent any
 	stages {
+		stage('Test') {
+			steps {
+				sh "npm test"
+			}
+		}
 		stage('Build') {
 			steps {
 				//
@@ -12,6 +17,6 @@ pipeline {
 				//
 				sh "echo Deploy stage"
 			}
-		}
+		
 	}
 }
