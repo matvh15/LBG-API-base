@@ -6,13 +6,6 @@ pipeline {
 		DOCKERHUB_CREDS=credentials("DOCKERHUB_CREDS")
 	}
 	stages {
-		stage('Remove') {
-			steps {
-				sh """
-				docker rm -f ${docker ps -qa}
-				"""
-			}
-		}
 		stage('Test') {
 			steps {
 				sh "npm install"
