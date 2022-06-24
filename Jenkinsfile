@@ -1,5 +1,8 @@
 pipeline {
 	agent any
+	environment {
+		image_name="matvh15/lbg-api-app:latest"
+	}
 	stages {
 		stage('Test') {
 			steps {
@@ -9,8 +12,9 @@ pipeline {
 		}
 		stage('Build') {
 			steps {
-				//
-				sh "echo Build stage"
+				sh """
+				echo "Build stage"
+				docker build -t $image_name .
 			}
 		}
 		stage('Deploy') {
