@@ -22,7 +22,7 @@ pipeline {
 		}
 		stage('Push') {
 			steps {
-				sh "docker login -u ${DOCKERHUB_CREDS_USR} -p ${DOCKERHUB_CREDS_PSD}"
+				sh "docker login -u ${DOCKERHUB_CREDS_USR} -p ${DOCKERHUB_CREDS_PSW}"
 				sh """
 				echo "Push image to registry: "
 				docker push ${APP_NAME}:${TAG}
