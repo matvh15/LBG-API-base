@@ -17,6 +17,6 @@ pipeline {
 				//
 				sh "echo Deploy stage"
 			}
-		
+		}	
 	}
 }
