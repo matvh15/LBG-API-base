@@ -16,7 +16,7 @@ pipeline {
 			steps {
 				sh """
 				echo "Build stage"
-				docker build -t ${APP_NAME}:${TAG} .
+				docker build -t ${DOCKERHUB_CREDS_USR}/${APP_NAME}:${TAG} .
 		   		"""
 			}
 		}
@@ -25,7 +25,7 @@ pipeline {
 				sh "docker login -u ${DOCKERHUB_CREDS_USR} -p ${DOCKERHUB_CREDS_PSW}"
 				sh """
 				echo "Push image to registry: "
-				docker push ${APP_NAME}:${TAG}
+				docker push ${DOCKERHUB_CREDS_USR}${APP_NAME}:${TAG}
 				"""
 			}	
 		}
