@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: lbg-api-app
-        image: gcr.io/lbg6-130622/lbg-api-app-mvh:latest
+        image: {{IMAGE_NAME}}
         ports:
         - containerPort: 8080

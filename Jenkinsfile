@@ -17,7 +17,7 @@ pipeline {
 			steps {
 				sh """
 				echo "Build stage"
-				docker build -t ${REGISTRY}/${APP_NAME}:${TAG} .
+				docker build -t ${REGISTRY}/${APP_NAME}:${BUILD_NUMBER} .
 		   		"""
 			}
 		}
@@ -26,13 +26,14 @@ pipeline {
 				//sh "docker login -u ${DOCKERHUB_CREDS_USR} -p ${DOCKERHUB_CREDS_PSW}"
 				sh """
 				echo "Push image to registry: "
-				docker push ${REGISTRY}/${APP_NAME}:${TAG}
+				docker push ${REGISTRY}/${APP_NAME}:${BUILD_NUMBER}
 				"""
 			}	
 		}
 		stage('Deploy') {
 			steps {
-				sh "kubectl apply -f kubernetes"
+				sh "kubectl apply -f kubernetes/service.yml"
+				sh "sed -e "s,{{IMAGE_NAME}},${REGISTRY}/${APP_NAME}:${BUILD_NAME},g" kubernetes/application.yaml | kubectl apply -f -"
 			}
 		}
 	}
