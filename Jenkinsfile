@@ -33,7 +33,7 @@ pipeline {
 		stage('Deploy') {
 			steps {
 				sh "kubectl apply -f kubernetes/service.yml"
-				sh "sed -e "s,{{IMAGE_NAME}},${REGISTRY}/${APP_NAME}:${BUILD_NAME},g" kubernetes/application.yaml | kubectl apply -f -"
+				sh "sed -e 's,{{IMAGE_NAME}},${REGISTRY}/${APP_NAME}:${BUILD_NAME},g' kubernetes/application.yaml | kubectl apply -f -"
 			}
 		}
 	}
