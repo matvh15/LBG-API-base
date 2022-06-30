@@ -32,8 +32,7 @@ pipeline {
 		}
 		stage('Deploy') {
 			steps {
-				sh "echo Deploy stage"
-				sh "docker run -d -p 80:8080 --name ${APP_NAME} ${REGISTRY}/${APP_NAME}:${TAG}"
+				sh "kubectl apply -f kubernetes"
 			}
 		}
 	}
