@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lbg-api-app
+  labels:
+    app: lbg-api-app
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: lbg-api-app
+  template:
+    metadata:
+      labels:
+        app: lbg-api-app
+    spec:
+      containers:
+      - name: lbg-api-app
+        image: gcr.io/lbg6-130622/lbg-api-app-mvh:latest
+        ports:
+        - containerPort: 8080
