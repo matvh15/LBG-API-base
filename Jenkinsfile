@@ -13,6 +13,11 @@ pipeline {
 				sh "npm test"
 			}
 		}
+		stage('Sonar') {
+			steps {
+				sh "sonar-scanner -Dsonar.host.url=http://localhost:9000 -Dsonar.login=admin -Dsonar.password=password"
+			}
+		}
 		stage('Build') {
 			steps {
 				sh """
